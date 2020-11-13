@@ -1,0 +1,25 @@
+int recursive(Node* head){
+    if(head==NULL)
+    return 1;
+    
+    int sum=head->data+recursive(head->next);
+    head->data=sum%10;
+    return sum/10;
+    
+}
+
+Node* addOne(Node *head) 
+{
+    // Your Code here
+    // return head of list after adding one
+    
+    int carry=recursive(head);
+    
+    if(carry)
+    {
+        Node* temp=new Node(carry);
+        temp->next=head;
+        head=temp;
+    }
+    
+    return head;

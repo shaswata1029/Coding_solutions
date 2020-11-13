@@ -1,0 +1,61 @@
+class Solution {
+    
+    int arr[10000]={0};
+public:
+    
+    
+    
+    int del(vector<int>v,int i,int n){
+        
+        if(v[i]==0 or i==n)
+            return 0;
+        
+        if(arr[i]!=0)
+            return arr[i];
+        int ans=0;
+        ans+=v[i];
+        
+        
+        int j;
+        for(j=0;j<n;j++)
+            if(v[j]==v[i]-1 or v[j]==v[i]+1)
+                v[j]=0;
+        
+        v[i]=0;
+        int maxi=0;
+        
+        
+        for(j=0;j<n;j++)
+        {
+            if(v[j]!=0)
+            maxi=max(maxi,del(v,j,n));
+        }
+        
+        
+        ans=ans+maxi;
+        arr[i]=ans;
+        cout<<ans;
+        return ans;
+    }
+    
+    
+    
+    int deleteAndEarn(vector<int>v) {
+        
+        int n=v.size();
+        sort(v.begin(),v.end());
+        reverse(v.begin(),v.end());
+        int ans=0;
+        int temp;
+       for(int i=0;i<n;i++)
+       {
+           temp=del(v,i,n);
+           
+           cout<<temp;
+           ans=max(ans,temp);
+       }
+        
+        
+        return ans;
+    }
+};

@@ -1,0 +1,36 @@
+class a{
+stack<int>s;     
+ int sum=0;
+ int len=0;
+ int ans=0;
+ public:
+int sum_temp(Node*root){
+    
+    if(root==NULL)
+    return 0;
+    s.push(root->data);
+    sum+=root->data;
+    
+    sum_temp(root->left);
+    sum_temp(root->right);
+    
+    if(s.size()>len){
+    len=s.size();    
+    ans=sum;
+    }
+    else if(s.size()==len)
+    ans=max(sum,ans);
+    
+    
+    sum-=root->data;
+    s.pop();
+   return ans;
+} 
+};
+int sumOfLongRootToLeafPath(Node* root)
+{
+    a ob;
+    
+    int answer=ob.sum_temp(root);;
+	return answer;
+}

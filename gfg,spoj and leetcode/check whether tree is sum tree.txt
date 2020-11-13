@@ -1,0 +1,43 @@
+class ans{
+    public:
+    int sum;
+    bool flag;
+};
+
+ans sumtree(Node*root){
+    ans ob;
+    if(root==NULL){
+        ob.sum=0;
+        ob.flag=true;
+        return ob;
+    }
+    
+    ans l=sumtree(root->left);
+    ans r=sumtree(root->right);
+    
+    if(root->left==NULL and root->right==NULL)
+    ob.sum=root->data;
+    else
+    ob.sum=l.sum + r.sum;
+    
+    if(ob.sum==root->data and l.flag==true and r.flag==true)
+    ob.flag=true;
+    else
+    ob.flag=false;
+    if(!(root->left==NULL and root->right==NULL))
+    ob.sum+=root->data;
+    
+    return ob;
+    
+    
+}
+
+bool isSumTree(Node* root)
+{
+     // Your code here
+     
+     ans ob=sumtree(root);
+     
+     return ob.flag;
+     
+}
