@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        
+        int n,k;
+        cin>>n>>k;
+        int a[n*k+1];
+        
+        for(int i=1;i<=n*k;i++)
+        cin>>a[i];
+        
+        long long  int sum=0;
+        int j=n*k;
+        int p;
+        if(n%2==0)
+        p=(n+1)/2;
+        else
+        p=n/2;
+        while(k--){
+            j=j-p;
+            sum+=a[j];
+            j--;
+        }
+        cout<<sum<<endl;
+    }
+    return 0;
+}
+ 

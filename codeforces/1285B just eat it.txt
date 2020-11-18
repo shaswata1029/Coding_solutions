@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool solve(int a[],int n){
+     long long int sum=0;
+    for(int i=0;i<n;i++){
+        sum=sum+a[i];
+        if(sum<=0)
+        return false;
+    }
+    sum=0;
+    for(int i=n-1;i>=0;i--){
+        sum=sum+a[i];
+        if(sum<=0)
+        return false;
+    }
+    
+    return true;
+}
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        int a[n];
+        for(int i=0;i<n;i++)
+        cin>>a[i];
+        
+        bool ans=solve(a,n);
+        
+        if(ans)
+        cout<<"YES";
+        else
+        cout<<"NO";
+        cout<<endl;
+    }
+    return 0;
+}
