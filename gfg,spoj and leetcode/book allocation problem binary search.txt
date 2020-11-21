@@ -1,0 +1,48 @@
+int allocate(int a,int n,int m,long long int mid){
+    int count=1;
+    long long int pages=0;
+    
+    for(int i=0;in;i++)
+    {
+        if(pages+a[i]=mid)
+        pages=pages+a[i];
+        else
+        {
+            count++;
+            pages=a[i];
+             if(countm)
+        return 0;
+        }
+        
+       
+        
+        
+    }
+    
+    return 1;
+    
+}
+
+
+int findPages(int arr, int n, int m) {
+    code here
+    
+    
+    long long int s=max_element(arr,arr+n);
+    long long int e=0;
+    for(int i=0;in;i++)
+    e=e+arr[i];
+    long long int ans=LLONG_MAX;
+    while(s=e){
+        long long int mid=(s+e)2;
+        if(allocate(arr,n,m,mid)==1){
+            ans=min(ans,mid);
+             e=mid-1;
+        }
+       
+        else
+        s=mid+1;
+    }
+    
+    return ans;
+}
