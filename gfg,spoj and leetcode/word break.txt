@@ -1,0 +1,26 @@
+int wordBreak(string A, vector<string> &B) {
+    //code here
+       int n=A.size();
+     int ans[n];
+        memset(ans,0,sizeof(ans));
+    for(int i=0;i<n;i++){
+        for(int j=0;j<=i;j++){
+            string word=A.substr(j,i+1-j);
+            auto it=find(B.begin(),B.end(),word);
+            if(it!=B.end()){
+                if(j>0)
+                    ans[i]=ans[i]%100009 +ans[j-1]%100009; //since we do not need to have to chechk the exact number of value swe can apply a check here to handle large numbers using a midulo using a prime number
+                else
+                    ans[i]=ans[i]%100009+1;
+            }
+            
+        }
+       
+    }
+    
+    if(ans[n-1]>0)
+    return 1;
+    else
+    return 0;
+        
+    }

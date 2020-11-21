@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>a) {
+        
+        int ans[a.size()];
+        
+        if(a.size()<=2)
+            return 0;
+        ans[0]=0;
+        ans[1]=0;
+        
+        for(int i=2;i<a.size();i++){
+            if(a[i]-a[i-1]==a[i-1]-a[i-2])
+                ans[i]=ans[i-1]+1;
+            else
+                ans[i]=0;
+        }
+        
+        long long int sum=0;
+        for(int i=0;i<a.size();i++)
+            sum+=ans[i];
+        
+        return sum;
+        
+    }
+};
