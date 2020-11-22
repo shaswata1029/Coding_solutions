@@ -1,0 +1,33 @@
+bool find(Node* root,int val){
+    if(root==NULL)
+    return false;
+    if(root->data==val)
+    return true;
+    if(root->data<val)
+     return find(root->right,val);
+    else
+    return find(root->left,val);
+}
+
+void findpair(Node* root1,Node*root2,int x,int &i){
+    if(root1==NULL)
+    return;
+    findpair(root1->left,root2,x,i);
+    bool f;
+    int comp=x-root1->data;
+    
+    f=find(root2,comp);
+    if(f)
+    i++;
+    
+    findpair(root1->right,root2,x,i);
+   
+}
+
+int countPairs(Node* root1, Node* root2, int x)
+{
+    // Code here
+    int i=0;
+    findpair(root1,root2,x,i);
+    return i;
+}
