@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		string s;
+		string s1="SUVO";
+		string s2="SUVOJIT";
+
+		cin>>s;
+		int n=s.size();
+		int c1=0,c2=0;
+		for(int i=0;i<n;i++){
+			if(s[i]=='S' and i+6<n)
+		{ 
+			string sub=s.substr(i,7);
+			if(sub==s2){
+				c2++;
+				i=i+5;
+				continue;
+			}
+		}
+			if(s[i]=='S' and i+3<n){
+			string sub=s.substr(i,4);
+			if(sub==s1){
+				c1++;
+				i=i+3;
+				continue;
+			}
+			
+			}
+		}
+
+		cout<<s1<<" = "<<c1<<", "<<s2<<" = "<<c2<<endl;
+	}
+	return 0;
+}

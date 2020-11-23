@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+    int n,p;
+    cin>>n>>p;
+    int a[p+1]={0};
+    int temp[p+2]={0};
+    
+    while(n--){
+        int x,rn;
+        cin>>x>>rn;
+        int l=max(0,x-rn);
+        int r=min(p,x+rn);
+        
+        temp[l]+=1;
+        temp[r+1]-=1;
+        
+    }
+    int c=0;
+    int ans=0;
+    int count=0;
+    for(int i=0;i<=p;i++){
+        c=c+temp[i];
+        a[i]+=c;
+        
+        if(a[i]!=1){
+            ans=max(ans,count+1);
+            count++;
+            
+        }
+        else
+            count=0;
+        
+    }
+    
+    
+    cout<<ans<<endl;
+    
+    return 0;
+}
