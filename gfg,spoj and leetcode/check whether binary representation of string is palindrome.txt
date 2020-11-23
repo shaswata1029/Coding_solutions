@@ -1,0 +1,30 @@
+class Solution{
+public:
+
+bool solve(int n,int k){
+    if(n & 1<<(k-1))
+    return true;
+    else
+    return false;
+}
+
+    int isPallindrome(long long int N){
+        // code here
+        long long int t=N;
+        int count=0;
+        while(t>0){
+            count++;
+            t=t/2;
+        }
+        
+        int l=count,r=1;
+        while(r<l){
+            
+            if(solve(N,l)!=solve(N,r))
+            return 0;
+            l--;
+            r++;
+        }
+        return 1;
+    }
+};

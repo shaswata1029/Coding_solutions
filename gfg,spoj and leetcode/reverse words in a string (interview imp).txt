@@ -1,0 +1,38 @@
+
+string reverseWords(string S) 
+{ 
+    // code here
+    int n=S.size();
+    stack<char>s;
+    
+    
+    
+   
+    
+    int j=0;
+    for(int i=0;i<n;i++){
+        if(S[i]=='.'){
+            while(!s.empty())
+            {
+                char ch=s.top();
+                s.pop();
+                S[j++]=ch;
+            }
+            j++;
+        }
+        else
+        s.push(S[i]);
+    }
+    
+     while(!s.empty())
+            {
+                char ch=s.top();
+                s.pop();
+                S[j++]=ch;
+            }
+    
+     for(int i=0;i<n/2;i++)
+    swap(S[i],S[n-i-1]);
+    
+    return S;
+} 
