@@ -1,0 +1,25 @@
+class Solution {
+public:
+    
+    
+    int findtilt_temp(TreeNode*root,int &sum){
+        if(root==NULL)
+            return 0;
+        
+        int left=findtilt_temp(root->left,sum);
+        int right=findtilt_temp(root->right,sum);
+        
+        int tilt=abs(left-right);
+        sum=sum+tilt;
+       
+        
+        return root->val+left+right;
+    }
+    int findTilt(TreeNode* root) {
+        
+       int sum=0;
+     findtilt_temp(root,sum);
+        
+        return sum;
+    }
+};
