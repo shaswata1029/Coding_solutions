@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int minSwapsCouples(vector<int>& row) {
+        
+        map<int,int> mp;
+
+    for(int i=0;i<row.size();i++)
+    {
+        mp[row[i]]=i;
+    }
+    
+    int cnt=0;
+    
+    for(int i=0;i<row.size();i+=2)
+    {
+        int val;
+        
+        if(row[i]%2==0)
+            val=row[i]+1;
+        else
+            val=row[i]-1;
+        
+        if(row[i+1]==val)
+            continue;
+        
+        swap(row[i+1],row[mp[val]]);
+        mp[row[mp[val]]]=mp[val];
+        cnt++;
+    }
+    
+    return cnt;
+}
+        
+    
+};
