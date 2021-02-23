@@ -1,0 +1,60 @@
+string reverseShuffleMerge(string s) {
+
+int used[26]={0};
+int req[26]={0};
+
+int n=s.length();
+for(int i=0;i<n;i++)
+{
+    used[s[i]-'a']++;
+}
+//finding the total no of characters in the string 
+
+for(int i=0;i<26;i++){
+    req[i]=used[i]/2;
+}
+//finding the required number of characters in the string
+
+string ans="";
+ans.push_back(s[n-1]);
+req[s[n-1]-'a']--;
+used[s[n-1]-'a']--;
+
+for(int i=n-2;i>=0;i--){
+    char ch=s[i];
+    if(req[ch-'a']>0){
+//checking if the character  is required or not at this stage
+    if(ch>=ans[ans.length()-1])
+    {
+//if the current character is lexicographically larger than prev one
+        ans.push_back(ch);
+        req[ch-'a']--;
+        used[ch-'a']--;
+    }
+    else{
+//if the current character is lexicographically smaller than prev one and the remaining number of charcter is used in greater than required one , because then only we can find that character at a later stage thus making it lexicographically smallest
+        while(ans.length()>0 and ch<ans[ans.length()-1] and used[ans[ans.length()-1]-'a']>req[ans[ans.length()-1]-'a']){
+            req[ans[ans.length()-1]-'a']++;
+//increasing the required character freq as we are popping this out and use it later making it lexi smallest
+            ans.pop_back();
+        }
+         ans.push_back(ch);
+        req[ch-'a']--;
+        used[ch-'a']--;  
+//similar as the prev case we append this character after the check         
+    }
+    }
+    else
+    {
+        used[ch-'a']--;
+//if character is not required we simply just continue by decreasing the freq of the character
+    }  
+    
+   // cout<<ans<<endl;
+//checking the string at each stage
+    
+}
+
+return ans;
+
+}
