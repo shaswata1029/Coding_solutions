@@ -1,0 +1,60 @@
+// Complete the minimumSwaps function below.
+int minimumSwaps(vector<int>v) {
+    
+    vector<int>temp=v;
+    sort(temp.begin(),temp.end());
+    
+    map<int,int>m;
+    
+    int n=v.size();
+    
+    for(int i=0;i<n;i++){
+        m[v[i]]=i;
+    }
+    int ans=0;
+    
+    for(int i=0;i<n;i++){
+        if(v[i]!=temp[i]){
+            ans++;
+            int t=v[i];
+            swap(v[i],v[m[temp[i]]]);
+            m[t]=m[temp[i]];
+            m[temp[i]]=i;
+            
+        }
+        
+    }
+    return ans;
+
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    cin >> n;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    string arr_temp_temp;
+    getline(cin, arr_temp_temp);
+
+    vector<string> arr_temp = split_string(arr_temp_temp);
+
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; i++) {
+        int arr_item = stoi(arr_temp[i]);
+
+        arr[i] = arr_item;
+    }
+
+    int res = minimumSwaps(arr);
+
+    fout << res << "\n";
+
+    fout.close();
+
+    return 0;
+}
