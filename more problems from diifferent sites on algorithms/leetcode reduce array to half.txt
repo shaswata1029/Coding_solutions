@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int minSetSize(vector<int>v) {
+        int n=v.size();
+       int k=n/2;
+        int ans=0;
+        
+        int max=*max_element(v.begin(),v.end());
+        
+        int arr[max+1];
+        
+        for(int i=0;i<=max;i++)
+            arr[i]=0;
+        
+        for(int i=0;i<n;i++){
+            arr[v[i]]++;
+        }
+        
+        sort(arr,arr+max+1);
+        
+    for(int i=max;i>=0;i--){
+        if(k>=0)
+            k=k-arr[i];
+        ans++;
+        if(k<=0)
+            break;
+    }
+return ans;
+        
+    }
+};
