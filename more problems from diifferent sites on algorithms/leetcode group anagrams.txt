@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>v) {
+        
+        
+        int a[26];
+        int k=50;
+        
+            
+        map< map<char,int>,int>m;
+        vector<vector<string>>ans;
+        
+        int n=v.size();
+        
+        for(int i=0;i<n;i++){
+            string s=v[i];
+            map<char,int>m1;
+            
+            for(int j=0;j<s.size();j++)
+                m1[s[j]]++;
+            
+            if(m.find(m1)!=m.end())
+                ans[m[m1]].push_back(s);
+            else{
+                m[m1]=ans.size();
+                vector<string>temp;
+                temp.push_back(s);
+                ans.push_back(temp);
+            }
+        
+        }
+        
+        return ans;
+    }
+};
