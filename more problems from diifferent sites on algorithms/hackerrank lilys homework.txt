@@ -1,0 +1,40 @@
+//this problem can be considered as a base for most of the swapping problems
+
+
+int count(vector<int> arr,vector<int> v,int n){
+    int c=0;
+    map<int,int>m;
+    for(int i=0;i<n;i++){
+       m[arr[i]]=i;
+    }
+    
+    
+    
+    for(int i=0;i<n;i++){
+        if(arr[i]!=v[i]){
+            c++;
+           int idx=m[v[i]];
+           swap(arr[i],arr[idx]);
+           m[arr[idx]]=idx;
+        }
+    }
+    return c;
+}
+
+// Complete the lilysHomework function below.
+int lilysHomework(vector<int> v) {
+    
+    vector<int>arr=v;
+    int n=arr.size();
+    
+    sort(v.begin(),v.end());
+    int c1=count(arr,v,n);
+    reverse(v.begin(),v.end());
+    int c2=count(arr,v,n);
+    
+   
+    
+    return min(c1,c2);
+
+
+}
