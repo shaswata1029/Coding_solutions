@@ -1,0 +1,65 @@
+//this is a vey good question to build the concept of heaps
+
+
+class Compare{
+    public:
+    bool operator()(pair<int,int>p1,pair<int,int>p2){
+        if(p1.first==p2.first)
+            return p1.second>p2.second;
+        else
+            return p1.first>p2.first;
+    }
+};
+
+
+class Solution {
+public:
+    bool isPossible(vector<int>v) {
+        
+        priority_queue<pair<int,int>,vector<pair<int,int>>,Compare>pq;
+        
+        int n=v.size();
+        
+        pq.push({v[0],1});
+        for(int i=1;i<n;i++){
+            
+            pair<int,int> ele=pq.top();
+            pq.pop();
+            cout<<ele.first<<" "<<ele.second<<endl;
+            if(ele.first==v[i]){
+                pq.push({v[i],1});
+                pq.push(ele);
+            }
+            else if(ele.first<v[i]-1){
+                if(ele.second<3)
+                    return false;
+                while(!pq.empty() and pq.top().first<v[i]-1){
+                    if(pq.top().second<3)
+                    return false;
+                    pq.pop();
+                }
+                if(pq.empty()){
+                    pq.push({v[i],1});
+                }else{
+                auto e=pq.top();
+                pq.pop();
+                pq.push({v[i],e.second+1});
+                }
+                
+            }
+            else
+            pq.push({v[i],ele.second+1});
+        }
+        
+        cout<<endl;
+        
+        while(!pq.empty()){
+            auto e=pq.top();
+            pq.pop();
+            cout<<e.first<<" "<<e.second<<endl;
+            if(e.second<3)
+                return false;
+        }
+        return true;
+    }
+};
