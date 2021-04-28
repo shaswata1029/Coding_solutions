@@ -1,0 +1,62 @@
+class Solution {
+    
+    bool check(int i, int j,int m,int n){
+         if(i>=m or j>=n or i<0 or j<0)
+            return 0;
+        else 
+            return 1;
+    }
+    
+    void update(int i, int j,int m,int n,vector<vector<int>>& v,vector<vector<int>>& checked){
+        
+        if(i>=m or j>=n or i<0 or j<0 or checked[i][j]==1)
+            return;
+        
+        checked[i][j]=1;
+        
+        cout<<i<<" "<<j<<endl;
+        int l=0;
+        
+        for(int a=-1;a<2;a++)
+            for(int b=-1;b<2;b++){
+                if(a!=0 or b!=0){
+                    if(check(i+a,j+b,m,n) and v[i+a][j+b]==1)
+                l++;
+                }
+            }
+        
+         for(int a=-1;a<2;a++)
+            for(int b=-1;b<2;b++){
+                if(a!=0 or b!=0){
+                   update(i+a,j+b,m,n,v,checked);
+                }
+            }
+         
+        
+        if(v[i][j]==1){
+            if(l<2 or l>3)
+                v[i][j]=0;
+        }else{
+            if(l==3)
+                v[i][j]=1;
+        }
+    }
+public:
+    void gameOfLife(vector<vector<int>>& v) {
+        int m=v.size();
+        int n=v[0].size();
+       
+        vector<vector<int>>checked;
+        
+        for(int i=0;i<m;i++){
+            vector<int>t;
+            for(int j=0;j<n;j++){
+                t.push_back(0);                
+            }
+            checked.push_back(t);
+        }
+        
+        update(0,0,m,n,v,checked);
+       
+    }
+};

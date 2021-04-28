@@ -1,0 +1,66 @@
+class Solution {
+public:
+    
+    bool solution(int i,int j,int m ,int n,vector<vector<char>>&v,vector<vector<int>>&visited,string s,int k){
+        
+        if(i<0 or j<0 or i>=m or j>=n or visited[i][j]==1)
+            return false;
+            
+        
+        visited[i][j]=1;
+        
+        bool ans;
+        if(v[i][j]==s[k])
+            ans=true;
+        else
+            ans=false;
+        
+        if(ans==false){
+            visited[i][j]=0;
+            return false;  
+        }
+        
+        if(k==s.size()-1){
+            visited[i][j]=0;
+            return ans;
+            
+        }
+            
+        
+        ans=ans and (solution(i+1,j,m,n,v,visited,s,k+1) or solution(i-1,j,m,n,v,visited,s,k+1) or solution(i,j+1,m,n,v,visited,s,k+1) or solution(i,j-1,m,n,v,visited,s,k+1)) ;
+                     
+          visited[i][j]=0;           
+        
+        return ans;
+        
+        
+    }
+    
+    bool exist(vector<vector<char>>&v , string s) {
+        
+        int m=v.size();
+        int n=v[0].size();
+        
+        vector<vector<int>>visited;
+        
+        for(int i=0;i<m;i++){
+            vector<int>t;
+            for(int j=0;j<n;j++)
+                t.push_back(0);
+            visited.push_back(t);
+        }
+        
+        
+        for(int i=0;i<m;i++)
+            for(int j=0;j<n;j++){
+                bool ans=solution(i,j,m,n,v,visited,s,0);
+                if(ans==true)
+                    return true;
+            }
+        
+        
+        return false;
+        
+        
+    }
+};
