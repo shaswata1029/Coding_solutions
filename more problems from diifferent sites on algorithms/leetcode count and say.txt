@@ -1,0 +1,40 @@
+class Solution {
+public:
+    
+    
+    
+    int say(string &t,string s,int k){
+
+        if(k==s.size()-1)
+            return 1;
+        
+        int ans=say(t,s,k+1);
+            
+        if(s[k]==s[k+1])
+            return ans+1;
+        
+            t.push_back(s[k+1]);
+            t.push_back(ans+48);
+            return 1;
+        
+        
+    }
+    string countAndSay(int n) {
+        string dp[n+1];
+        
+        dp[0]="0";
+        dp[1]="1";
+        
+        for(int i=2;i<=n;i++){
+            string t="";
+            string s=dp[i-1];
+           int ans=say(t,s,0);
+            t.push_back(s[0]);
+            t.push_back(ans+48);
+            reverse(t.begin(),t.end());
+            dp[i]=t;
+        }
+        
+        return dp[n];
+    }
+};

@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        
+        vector<string> v[n+1];
+        vector<string>t;
+        t.push_back("");
+        v[0]=t;
+        t.pop_back();
+        t.push_back("()");
+        v[1]=t;
+        
+        for(int i=2;i<=n;i++){
+            vector<string>temp;
+            for(int j=0;j<i;j++){
+                vector<string>t1=v[j];
+                vector<string>t2=v[i-j-1];
+                
+                int n1=t1.size();
+                int n2=t2.size();
+                
+                for(int k=0;k<n1;k++ )
+                    for(int l=0;l<n2;l++){
+                        string s="("+t1[k]+")"+t2[l];
+                        temp.push_back(s);
+                    }
+                
+            }
+            v[i]=temp;
+            
+        }
+        return v[n];
+    }
+};
