@@ -1,0 +1,44 @@
+class Solution {
+public:
+    int sumSubarrayMins(vector<int>& v) {
+        int N=1000000007;
+        int n=v.size();
+        int l[n];
+        int r[n];
+        stack<int>s1;
+        stack<int>s2;
+        
+        for(int i=n-1;i>=0;i--){
+            while(!s1.empty() and v[s1.top()]>v[i])
+                s1.pop();
+            if(s1.empty())
+                r[i]=n-i;
+            else
+                r[i]=s1.top()-i;
+            s1.push(i);
+            
+        }
+        
+        
+        for(int i=0;i<n;i++){
+            while(!s2.empty() and v[s2.top()]>=v[i])
+                s2.pop();
+            if(s2.empty())
+                l[i]=i+1;
+            else
+                l[i]=i-s2.top();
+            s2.push(i);
+            
+        }
+       
+        int ans=0;
+        for(int i=0;i<n;i++){
+            long prod=v[i]%N;
+            prod=(prod%N*l[i]%N)%N;
+            prod=(prod%N*r[i]%N)%N;
+            ans=(ans%N+prod%N)%N;
+            
+        }
+        return ans;
+    }
+};
