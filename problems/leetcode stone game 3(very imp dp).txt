@@ -1,0 +1,40 @@
+class Solution {
+public:
+    
+    string stoneGameIII(vector<int>&v) {
+        int n=v.size();
+        cout<<n;
+        int dp[50006]={0};
+        
+        for(int i=0;i<n;i++)
+            dp[i]=INT_MAX;
+        
+        for(int i=n-1;i>=0;i--){
+            int k=0;
+            int s=INT_MIN;
+            int sum=0;
+            for(int j=i;j<n and k<3;j++){
+                sum+=v[j];
+                s=max(s,sum+min(dp[i+2+k],min(dp[i+3+k],dp[i+4+k])));
+                k++;
+            }
+            dp[i]=s;
+        }
+        
+        
+        int a=dp[0];
+            
+        int sum=0;
+        for(int i=0;i<n;i++)
+            sum+=v[i];
+        
+        int b=sum-a;
+         cout<<a<<" "<<b;
+        if(a==b)
+            return "Tie";
+        else if(a>b)
+            return "Alice";
+        
+            return "Bob";
+    }
+};

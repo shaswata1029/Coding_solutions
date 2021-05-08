@@ -1,0 +1,46 @@
+class Solution {
+public:
+    
+    int score(vector<int>&v,int n,int i,int dp[]){
+        
+        if(i>=n)
+            return 0;
+        if(dp[i]!=INT_MAX)
+            return dp[i];
+        
+        int s=INT_MIN;
+        s=v[i]+min(score(v,n,i+2,dp),min(score(v,n,i+3,dp),score(v,n,i+4,dp)));
+        if(i+1<n)
+        s=max(s,v[i]+v[i+1]+min(score(v,n,i+3,dp),min(score(v,n,i+4,dp),score(v,n,i+5,dp))));
+        
+        if(i+2<n)
+s=max(s,v[i]+v[i+1]+v[i+2]+min(score(v,n,i+4,dp),min(score(v,n,i+5,dp),score(v,n,i+6,dp))));
+        
+         return dp[i]=s;
+        
+    }
+    
+    string stoneGameIII(vector<int>&v) {
+        int n=v.size();
+        cout<<n;
+        int dp[50000];
+        
+        for(int i=0;i<50000;i++)
+            dp[i]=INT_MAX;
+        
+        int a=score(v,n,0,dp);
+        
+        int sum=0;
+        for(int i=0;i<n;i++)
+            sum+=v[i];
+        
+        int b=sum-a;
+        
+        if(a==b)
+            return "Tie";
+        else if(a>b)
+            return "Alice";
+        
+            return "Bob";
+    }
+};
