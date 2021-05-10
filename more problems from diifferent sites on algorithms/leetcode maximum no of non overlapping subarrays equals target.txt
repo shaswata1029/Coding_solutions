@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int maxNonOverlapping(vector<int>&v, int target) {
+        
+        map<int,int>m;
+        int n=v.size();
+        m.insert({0,-1});
+        
+        int sum=0;
+         int last=INT_MIN;
+        int ans=0;
+        for(int i=0;i<n;i++){
+            sum+=v[i];
+            
+           
+            
+            if(m.find(sum-target)!=m.end())
+            {
+                if(m[sum-target]>=last){
+                    ans++;
+                    last=i;
+                }    
+            }
+            
+            m[sum]=i;       
+        }
+      return ans;  
+    }
+};
